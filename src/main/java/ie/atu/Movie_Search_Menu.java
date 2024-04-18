@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class Movie_Search_Menu {
+public class Movie_Search_Menu implements Movie_Search {
     public ArrayList<String> searchMovie(Connection conn, Scanner scanner, String userSearch) throws SQLException {
         ArrayList<String> results = new ArrayList<>();
 
