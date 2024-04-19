@@ -33,7 +33,7 @@ public class Login {
                 stmt.setString(2, password);
                 ResultSet resultSet = stmt.executeQuery();
                 if (resultSet.next()) {
-                    System.out.println("Login successful.\n");
+                    System.out.println("Login successful .\n");
                     x = 1;
                 } else {
                     System.out.println("Invalid username or password.");
