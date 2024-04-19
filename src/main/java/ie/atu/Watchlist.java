@@ -11,10 +11,10 @@ public class Watchlist {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username:");
         String username = scanner.nextLine();
-        showWatchlist(username);
+        showWatchlist(username, scanner);
     }
 
-    public static void showWatchlist(String username) {
+    public static void showWatchlist(String username, Scanner scanner) {
         String selectMoviesSQL = "SELECT movie.movie_name " +
                 "FROM watchlist " +
                 "JOIN movie ON watchlist.movie_id = movie.movie_id " +

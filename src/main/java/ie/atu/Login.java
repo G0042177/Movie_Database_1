@@ -8,20 +8,19 @@ import java.util.Scanner;
 public class Login {
     public static void main(String[] args) throws SQLException {
         String continuing = "y";
-        int y=0;
-        int x=0;
+        int y = 0;
+        int x = 0;
         int logout = 0;
 // Connect to the database
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mydatabase", "root", "password");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mydatabase", "root", "user");
         Scanner scanner = new Scanner(System.in);
         char log;
         System.out.println("Would you like to: Login or Sign-up? L || S:");
         log = scanner.nextLine().charAt(0);
 
         if (log == 'S' || log == 's') {
-            signUp(conn,scanner);
-        }
-        else if(log == 'L' || log== 'l'){
+            signUp(conn, scanner);
+        } else if (log == 'L' || log == 'l') {
             try {
 // Prompt the user to input data
                 System.out.println("Enter username:");
@@ -29,19 +28,19 @@ public class Login {
                 System.out.println("Enter password:");
                 String password = scanner.nextLine();
 
-                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ? AND password = ?");
                 stmt.setString(1, username);
                 stmt.setString(2, password);
                 ResultSet resultSet = stmt.executeQuery();
                 if (resultSet.next()) {
-                    System.out.println("Login successful.\n");
-                    x=1;
+                    System.out.println("Login successful .\n");
+                    x = 1;
                 } else {
                     System.out.println("Invalid username or password.");
                 }
-                if (x==1){
-                    while(continuing.equalsIgnoreCase("y")){
-                        System.out.println("Hello, \n What would you like to do" + username);
+                if (x == 1) {
+                    while (continuing.equalsIgnoreCase("y")) {
+                        System.out.println("Hello, \n What would you like to do " + username);
                         String[] menu = Menu_display.displayMenu();
                         for (String menuHeadings : menu) {
                             System.out.println(menuHeadings);
@@ -60,13 +59,12 @@ public class Login {
                                 System.out.println("Which movie would you like to watch? ");
                                 String userSearch = scanner.nextLine();
                                 Movie_Search_Menu searchMenu = new Movie_Search_Menu();
-                                ArrayList<String> results = searchMenu.searchMovie(conn,scanner,userSearch);
-                                if(results.size()==0){
+                                ArrayList<String> results = searchMenu.searchMovie(conn, scanner, userSearch);
+                                if (results.size() == 0) {
                                     System.out.println("No results found\n");
-                                }
-                                else {
+                                } else {
                                     System.out.println("Favourites:");
-                                    for (String result : results){
+                                    for (String result : results) {
                                         System.out.println(result);
                                     }
                                 }
@@ -76,13 +74,11 @@ public class Login {
                                 System.out.println("Your Favourites --> f | Your Watchlist --> w");
                                 int option = scanner.nextInt();
                                 scanner.nextLine();
-                                if(option==1){
-                                  Favorites.showFavorites(username);
-                                }
-                                else if(option ==2){
-                                    Watchlist.ShowWatchlist(username,scanner);
-                                }
-                                else{
+                                if (option == 1) {
+                                    Favourites.showFavorites(username);
+                                } else if (option == 2) {
+                                    Watchlist.showWatchlist(username, scanner);
+                                } else {
                                     System.out.println("Invalid Entry, Try again");
                                 }
                                 break;
@@ -96,32 +92,32 @@ public class Login {
                                         System.out.println("Change name");
                                         System.out.println("Enter your new name:");
                                         String updatedName = scanner.nextLine();
-                                        Account.updateName(conn,updatedName,username);
+                                        Account.updateName(conn, updatedName, username);
                                         break;
                                     case 2:
                                         System.out.println("Change username");
                                         System.out.println("Enter your new username:");
                                         String updatedUsername = scanner.nextLine();
-                                        Account.updateUsername(conn,updatedUsername,username);
+                                        Account.updateUsername(conn, updatedUsername, username);
                                         break;
                                     case 3:
                                         System.out.println("Change Password");
                                         System.out.println("Enter your new Password:");
                                         String updatedPassword = scanner.nextLine();
-                                        Account.updatePassword(conn,updatedPassword,username);
+                                        Account.updatePassword(conn, updatedPassword, username);
                                         break;
                                     case 4:
                                         System.out.println("Change Email");
                                         System.out.println("Enter your new Email:");
                                         String updatedEmail = scanner.nextLine();
-                                        Account.updateEmail(conn,updatedEmail,username);
+                                        Account.updateEmail(conn, updatedEmail, username);
                                         break;
                                     case 5:
                                         System.out.println("Back to menu");
                                         break;
                                     case 6:
                                         System.out.println("Delete Account!");
-                                        Account.deleteAccount(conn,username);
+                                        Account.deleteAccount(conn, username);
                                         break;
                                     default:
                                         System.out.println("Invalid option");
@@ -146,53 +142,55 @@ public class Login {
             }
         }
 //if a user does not enter L or S when asked
-        else{
+        else {
             System.out.println("Invalid option --> 'L' for Log-in, or 'S' for Sign-up.");
         }
     }
+
     //increments the user_id for signing up
 //this way it creates another user after the last one in the database and doesn't start at id=0
     private static int getLastInsertId(Connection conn) throws SQLException {
         try (Statement stmt = conn.createStatement()) {
 // Retrieve the maximum value of the user_id column from the users table
-            ResultSet rs = stmt.executeQuery("SELECT MAX(user_id) FROM users");
+            ResultSet rs = stmt.executeQuery("SELECT MAX(user_id) FROM user");
             rs.next();
             int maxId = rs.getInt(1);
 // Increment the maximum value by 1 to get the next available user_id
             return maxId + 1;
         }
     }
-    public static void signUp(Connection conn, Scanner scanner){
+
+    public static void signUp(Connection conn, Scanner scanner) {
         ArrayList<String> details = new ArrayList<String>();
         try {
 // Prompt the user to input data
             System.out.println("Enter full name:");
             String name = scanner.nextLine();
-            details.add("Name:"+name);
+            details.add("Name:" + name);
             System.out.println("Enter username:");
             String username = scanner.nextLine();
-            details.add("Username:"+username);
+            details.add("Username:" + username);
             System.out.println("Enter email:");
             String email = scanner.nextLine();
-            details.add("Email:"+email);
+            details.add("Email:" + email);
             System.out.println("Enter DOB XXXX-XX-XX:");
             String dob = scanner.nextLine();
-            details.add("DOB:"+ dob);
+            details.add("DOB:" + dob);
             System.out.println("Enter gender, male, female or other");
             String gender = scanner.nextLine();
-            details.add("Gender:"+ gender);
+            details.add("Gender:" + gender);
             System.out.println("Enter country:");
             String country = scanner.nextLine();
-            details.add("Country:"+ country);
+            details.add("Country:" + country);
             System.out.println("Create a password");
             String password = scanner.nextLine();
-            details.add("Password:"+ password);
+            details.add("Password:" + password);
 
-            for(String detail : details){
+            for (String detail : details) {
                 System.out.println(detail);
             }
 // Insert a new record into the "users" table
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO users(user_id,name, email, dob, username, password, gender, country) VALUES (?,?,?,?,?,?,?,?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO user(user_id,name, email, dob, username, password, gender, country) VALUES (?,?,?,?,?,?,?,?)");
             stmt.setInt(1, getLastInsertId(conn));
             stmt.setString(2, name);
             stmt.setString(3, email);
@@ -210,3 +208,4 @@ public class Login {
         }
     }
 }
+
