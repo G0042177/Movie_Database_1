@@ -1,0 +1,1 @@
+SELECT * FROM moviedatabase.actors;
