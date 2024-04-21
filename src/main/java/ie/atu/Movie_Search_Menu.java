@@ -13,9 +13,10 @@ public class Movie_Search_Menu implements Movie_Search {
     public ArrayList<String> searchMovie(Connection conn, Scanner scanner, String userSearch) throws SQLException {
         ArrayList<String> results = new ArrayList<>();
 
-        PreparedStatement stmt = conn.prepareStatement("SELECT movie.title, movie.release_date, movie.rating, movie.synopsis, genre.name " +
+        PreparedStatement stmt = conn.prepareStatement("SELECT movie.title, movie.release_date, movie.rating, movie.synopsis, genre.name, director.name AS director_name " +
                 "FROM movie " +
                 "JOIN genre ON movie.genre_id = genre.genre_id " +
+                "JOIN director ON movie.director_id = director.director_id " +
                 "WHERE (movie.title LIKE ? OR genre.name LIKE ?)");
         stmt.setString(1, "%" + userSearch + "%");
         stmt.setString(2, "%" + userSearch + "%");
@@ -27,12 +28,15 @@ public class Movie_Search_Menu implements Movie_Search {
             double rating = resultSet.getDouble("rating");
             String synopsis = resultSet.getString("synopsis");
             String genreName = resultSet.getString("name");
+            String directorName = resultSet.getString("director_name");
             results.add("Movie Title: " + movieName +
                     "\nRelease Date: " + releaseDate +
                     "\nRating: " + rating +
                     "\nGenre: " + genreName +
+                    "\nDirector: " + directorName +
                     "\nSynopsis: " + synopsis + "\n");
         }
         return results;
     }
 }
+
