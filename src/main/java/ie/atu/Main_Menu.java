@@ -4,7 +4,7 @@ import ie.atu.pool.DatabaseUtils;
 import java.sql.*;
 public class Main_Menu {
     public void showMovies() {
-        String showMovies = "SELECT movie.movie_title, genre.name ,movie.release_date" +
+        String showMovies = "SELECT movie.movie_title, genre.name ," +
                 "FROM movie " +
                 "JOIN genre on movie.genre_id = genre.genre_id " +
                 "ORDER BY RAND() " +
