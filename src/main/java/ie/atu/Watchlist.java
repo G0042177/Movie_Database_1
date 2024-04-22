@@ -22,8 +22,8 @@ public class Watchlist {
         String selectMoviesSQL = "SELECT movie.movie_name " +
                 "FROM watchlist " +
                 "JOIN movie ON watchlist.movie_id = movie.movie_id " +
-                "JOIN users ON watchlist.user_id = users.user_id " +
-                "WHERE users.username = ?";
+                "JOIN user ON watchlist.user_id = users.user_id " +
+                "WHERE user.username = ?";
 
         try (Connection connection = DatabaseUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(selectMoviesSQL)) {

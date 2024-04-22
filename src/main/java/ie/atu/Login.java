@@ -74,11 +74,11 @@ public class Login {
                             case "W":
                                 System.out.println("Your Watchlist");
                                 System.out.println("Your Favourites --> f | Your Watchlist --> w");
-                                int option = scanner.nextInt();
+                                String option = scanner.nextLine();
                                 scanner.nextLine();
-                                if (option == 1) {
+                                if (option.equalsIgnoreCase("f")) {
                                     Favourites.showFavorites(username);
-                                } else if (option == 2) {
+                                } else if (option.equalsIgnoreCase("w")) {
                                     Watchlist.showWatchlist(username, scanner);
                                 } else {
                                     System.out.println("Invalid Entry, Try again");
@@ -191,7 +191,7 @@ public class Login {
             for (String detail : details) {
                 System.out.println(detail);
             }
-// Insert a new record into the "users" table
+// Insert a new record into the "user" table
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO user(user_id,name, email, dob, username, password, gender, country) VALUES (?,?,?,?,?,?,?,?)");
             stmt.setInt(1, getLastInsertId(conn));
             stmt.setString(2, name);
@@ -203,7 +203,7 @@ public class Login {
             stmt.setString(8, country);
             stmt.executeUpdate();
             System.out.println("We're working on it...");
-            System.out.println("Congrats, User createdm");
+            System.out.println("Congrats, User created");
         } catch (SQLException ex) {
             System.out.println("Failed to create user!");
             ex.printStackTrace();
