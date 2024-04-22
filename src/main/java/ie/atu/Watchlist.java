@@ -3,15 +3,19 @@ package ie.atu;
 import ie.atu.pool.DatabaseUtils;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Watchlist {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your username:");
-        String username = scanner.nextLine();
-        showWatchlist(username, scanner);
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Enter your username:");
+            String username = scanner.nextLine();
+            if (username != null && !username.isEmpty()) {
+                showWatchlist(username, scanner);
+            } else {
+                System.out.println("Invalid username.");
+            }
+        }
     }
 
     public static void showWatchlist(String username, Scanner scanner) {
@@ -38,7 +42,9 @@ public class Watchlist {
                 System.out.println("No movies found in your watchlist.");
             }
         } catch (SQLException e) {
+            System.out.println("An error occurred while accessing the database.");
             e.printStackTrace();
         }
     }
 }
+

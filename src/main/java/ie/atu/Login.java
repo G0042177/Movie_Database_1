@@ -14,7 +14,7 @@ public class Login {
         int x = 0;
         int logout = 0;
 // Connect to the database
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mydatabase", "root", "password");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mydatabase", "root", "user");
         Scanner scanner = new Scanner(System.in);
         char log;
         System.out.println("Would you like to: Login or Sign-up? L || S:");
