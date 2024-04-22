@@ -14,8 +14,8 @@ public class SignUpTest {
         // Arrange the variables
         String name = "John Doe";
         String username = "johndoe";
-        String email = "johndoe@example.com";
-        double dob = 1988.05;
+        String email = "johndoe@gmail.com";
+        double dob = 2000.11;
         String gender = "male";
         String country = "USA";
 

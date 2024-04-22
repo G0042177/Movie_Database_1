@@ -1,8 +1,7 @@
 package ie.atu.pool;
 import java.sql.*;
-public class UdpdateExample {
-    public class UpdateExample {
-        public static void main(String[] args) {
+public class UpdateExample {
+    public static void main(String[] args) {
             String updateSQL = "UPDATE users SET password = 'newpassword' WHERE username = 'Des'";
 
             try (Connection connection = DatabaseUtils.getConnection();
@@ -13,5 +12,4 @@ public class UdpdateExample {
                 e.printStackTrace();
             }
         }
-    }
 }

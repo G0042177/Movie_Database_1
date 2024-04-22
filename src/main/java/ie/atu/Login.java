@@ -5,6 +5,8 @@ import ie.atu.pool.DatabaseUtils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import ie.atu.Watchlist;
 public class Login {
     public static void main(String[] args) throws SQLException {
         String continuing = "y";
@@ -12,7 +14,7 @@ public class Login {
         int x = 0;
         int logout = 0;
 // Connect to the database
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mydatabase", "root", "user");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mydatabase", "root", "password");
         Scanner scanner = new Scanner(System.in);
         char log;
         System.out.println("Would you like to: Login or Sign-up? L || S:");
@@ -84,7 +86,7 @@ public class Login {
                                 break;
                             case "A":
                                 System.out.println("Account");
-                                System.out.println("Update Name (1) | Update Username (2) | Update Passwords (3) | Update Email (4) | Update Subscription (5) | Back to menu (6) | DELETE ACCOUNT (7)");//choose to see playlists and liked songs
+                                System.out.println("Update Name (1) | Update Username (2) | Update Passwords (3) | Update Email (4) |  | Back to menu (5) | DELETE ACCOUNT (6)");//choose to see playlists and liked songs
                                 int setting = scanner.nextInt();
                                 scanner.nextLine();
                                 switch (setting) {
