@@ -38,7 +38,7 @@ public class Login {
                     System.out.println("Login successful .\n");
                     x = 1;
                 } else {
-                    System.out.println("Invalid username or password.");
+                    System.out.println("Invalid username or password. ");
                 }
                 if (x == 1) {
                     while (continuing.equalsIgnoreCase("y")) {
