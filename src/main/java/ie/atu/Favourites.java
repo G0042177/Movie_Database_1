@@ -16,10 +16,10 @@ public class Favourites {
     public static void showFavorites(String username) {
         String selectSQL = "SELECT movie.title, genre.name " +
                 "FROM movie " +
-                "JOIN favorites ON movie.movie_id = favorites.movie_id " +
-                "JOIN users ON favorites.user_id = users.user_id " +
+                "JOIN favorite_movies f ON movie.movie_id = f.movie_id " +
+                "JOIN user ON f.user_id = user.user_id " +
                 "JOIN genre ON movie.genre_id = genre.genre_id " +
-                "WHERE users.username = ?";
+                "WHERE user.username = ?";
         ArrayList<String> favorites = new ArrayList<>();
 
         try (Connection connection = DatabaseUtils.getConnection();
