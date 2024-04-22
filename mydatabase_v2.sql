@@ -157,10 +157,10 @@ DROP TABLE IF EXISTS `movie_actor`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `movie_actor` (
   `movie_id` int NOT NULL,
-  `actor_id` int NOT NULL,
-  PRIMARY KEY (`movie_id`,`actor_id`),
-  KEY `actor_id_idx` (`actor_id`),
-  CONSTRAINT `actor_id` FOREIGN KEY (`actor_id`) REFERENCES `actors` (`actors_id`),
+  `actors_id` int NOT NULL,
+  PRIMARY KEY (`movie_id`,`actors_id`),
+  KEY `actor_id_idx` (`actors_id`),
+  CONSTRAINT `actors_id` FOREIGN KEY (`actors_id`) REFERENCES `actors` (`actors_id`),
   CONSTRAINT `movie_id` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`movie_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -239,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-19 17:47:05
+-- Dump completed on 2024-04-22 16:42:28
