@@ -3,7 +3,6 @@ package ie.atu;
 import ie.atu.pool.DatabaseUtils;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Watchlist {
@@ -32,7 +31,9 @@ public class Watchlist {
                 System.out.println("No movies found in your watchlist.");
             }
         } catch (SQLException e) {
+            System.out.println("An error occurred while accessing the database.");
             e.printStackTrace();
         }
     }
 }
+
