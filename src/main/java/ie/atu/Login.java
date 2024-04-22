@@ -6,7 +6,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ie.atu.Watchlist;
 public class Login {
     public static void main(String[] args) throws SQLException {
         String continuing = "y";
@@ -73,16 +72,13 @@ public class Login {
                                 break;
                             case "W":
                                 System.out.println("Your Watchlist");
-                                System.out.println("Your Favourites --> f | Your Watchlist --> w");
-                                String option = scanner.nextLine();
-                                scanner.nextLine();
-                                if (option.equalsIgnoreCase("f")) {
-                                    Favourites.showFavorites(username);
-                                } else if (option.equalsIgnoreCase("w")) {
-                                    Watchlist.showWatchlist(username, scanner);
-                                } else {
-                                    System.out.println("Invalid Entry, Try again");
-                                }
+                                Watchlist.showWatchlist(username);
+
+                                break;
+                            case "F":
+                                System.out.println("Your Favourites");
+                                Favourites.showFavourites(username);
+
                                 break;
                             case "A":
                                 System.out.println("Account");

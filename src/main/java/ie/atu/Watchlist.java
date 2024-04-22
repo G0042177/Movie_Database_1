@@ -7,18 +7,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Watchlist {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter your username:");
-        String username = scanner.nextLine();
-        showWatchlist(username, scanner);
-    }
 
-    public static void showWatchlist(String username, Scanner scanner) {
-        String selectMoviesSQL = "SELECT movie.movie_name " +
+    public static void showWatchlist(String username) {
+        String selectMoviesSQL = "SELECT movie.title " +
                 "FROM watchlist " +
                 "JOIN movie ON watchlist.movie_id = movie.movie_id " +
-                "JOIN user ON watchlist.user_id = users.user_id " +
+                "JOIN user ON watchlist.user_id = user.user_id " +
                 "WHERE user.username = ?";
 
         try (Connection connection = DatabaseUtils.getConnection();
@@ -31,7 +25,7 @@ public class Watchlist {
             int count = 0;
             while (resultSetMovie.next()) {
                 count++;
-                String movieName = resultSetMovie.getString("movie_name");
+                String movieName = resultSetMovie.getString("title");
                 System.out.println(count + ". " + movieName);
             }
             if (count == 0) {
