@@ -9,15 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Favourites {
-    public static void main(String[] args){
-        String username = "";
-        showFavorites(username);
-    }
-    public static void showFavorites(String username) {
+    public static void showFavourites(String username) {
         String selectSQL = "SELECT movie.title, genre.name " +
                 "FROM movie " +
-                "JOIN favorite_movies f ON movie.movie_id = f.movie_id " +
-                "JOIN user ON f.user_id = user.user_id " +
+                "JOIN favorite_movies  ON movie.movie_id = favorite_movies.movie_id " +
+                "JOIN user ON favorite_movies.user_id = user.user_id " +
                 "JOIN genre ON movie.genre_id = genre.genre_id " +
                 "WHERE user.username = ?";
         ArrayList<String> favorites = new ArrayList<>();
