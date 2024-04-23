@@ -4,8 +4,8 @@ import java.sql.*;
 public class Account {
     public static void updateName(Connection conn,String updatedName,String username) {
         try {
-            // Insert a new record into the "users" table
-            PreparedStatement stmt = conn.prepareStatement("UPDATE users SET name = ? WHERE username = ?");
+            // Insert a new record into the "user" table
+            PreparedStatement stmt = conn.prepareStatement("UPDATE user SET name = ? WHERE username = ?");
             stmt.setString(1, updatedName);
             stmt.setString(2, username);
             stmt.executeUpdate();
@@ -22,8 +22,8 @@ public class Account {
     }
     public static void updateUsername(Connection conn,String updatedUsername,String username) {
         try {
-            // Insert a new record into the "users" table
-            PreparedStatement stmt = conn.prepareStatement("UPDATE users SET username = ? WHERE username = ?");
+            // Insert a new record into the "user" table
+            PreparedStatement stmt = conn.prepareStatement("UPDATE user SET username = ? WHERE username = ?");
             stmt.setString(1, updatedUsername);
             stmt.setString(2, username);
             stmt.executeUpdate();
@@ -39,8 +39,8 @@ public class Account {
 
     public static void updatePassword(Connection conn,String updatedPassword,String username) {
         try {
-            // Insert a new record into the "users" table
-            PreparedStatement stmt = conn.prepareStatement("UPDATE users SET password = ? WHERE username = ?");
+            // Insert a new record into the "user" table
+            PreparedStatement stmt = conn.prepareStatement("UPDATE user SET password = ? WHERE username = ?");
             stmt.setString(1, updatedPassword);
             stmt.setString(2, username);
             stmt.executeUpdate();
@@ -55,8 +55,8 @@ public class Account {
     }
     public static void updateEmail(Connection conn,String updatedEmail,String username) {
         try {
-            // Insert a new record into the "users" table
-            PreparedStatement stmt = conn.prepareStatement("UPDATE users SET email = ? WHERE username = ?");
+            // Insert a new record into the "user" table
+            PreparedStatement stmt = conn.prepareStatement("UPDATE user SET email = ? WHERE username = ?");
             stmt.setString(1, updatedEmail);
             stmt.setString(2, username);
             stmt.executeUpdate();
@@ -73,7 +73,7 @@ public class Account {
     public static void deleteAccount(Connection conn,String username) {
         try {
 
-            PreparedStatement UserId = conn.prepareStatement("SELECT user_id FROM users WHERE username = ?");
+            PreparedStatement UserId = conn.prepareStatement("SELECT user_id FROM user WHERE username = ?");
             UserId.setString(1, username);
             ResultSet userIdResult = UserId.executeQuery();
 
@@ -89,7 +89,7 @@ public class Account {
                 deletePlaylist.setInt(1, userId);
                 deletePlaylist.executeUpdate();
 
-                PreparedStatement deleteAccountStmt = conn.prepareStatement("DELETE FROM users WHERE username = ?");
+                PreparedStatement deleteAccountStmt = conn.prepareStatement("DELETE FROM user WHERE username = ?");
                 deleteAccountStmt.setString(1, username);
                 deleteAccountStmt.executeUpdate();
 
