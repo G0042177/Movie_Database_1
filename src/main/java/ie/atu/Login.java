@@ -13,7 +13,7 @@ public class Login {
         int x = 0;
         int logout = 0;
 // Connect to the database
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mydatabase", "root", "user");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mydatabase", "root", "password");
         Scanner scanner = new Scanner(System.in);
         char log;
         System.out.println("Would you like to: Login or Sign-up? L || S:");
@@ -64,15 +64,41 @@ public class Login {
                                 if (results.size() == 0) {
                                     System.out.println("No results found\n");
                                 } else {
-                                    System.out.println("Favourites:");
                                     for (String result : results) {
                                         System.out.println(result);
+                                    }
+
+                                    // Offer option to add to watchlist or favorites
+                                    System.out.print("Would you like to add any of these movies to your watchlist (W) or favorites (F)? (W/F/None): ");
+                                    String addToListChoice = scanner.nextLine();
+                                    switch (addToListChoice.toUpperCase()) {
+                                        case "W":
+                                            System.out.print("Enter the movie ID to add to watchlist: ");
+                                            int movieIdToAddToWatchlist = scanner.nextInt();
+                                            scanner.nextLine(); // Consume newline character
+                                            searchMenu.addToWatchlist(conn, movieIdToAddToWatchlist, username);
+                                            System.out.println("Movie added to watchlist!");
+                                            break;
+                                        case "F":
+                                            System.out.print("Enter the movie ID to add to favorites: ");
+                                            int movieIdToAddToFavorites = scanner.nextInt();
+                                            scanner.nextLine(); // Consume newline character
+                                            searchMenu.addToFavorites(conn, movieIdToAddToFavorites, username);
+                                            System.out.println("Movie added to favorites!");
+                                            break;
+                                        case "NONE":
+                                            break; // Do nothing, continue without adding to list
+                                        default:
+                                            System.out.println("Invalid option");
+                                            break;
                                     }
                                 }
                                 break;
                             case "W":
                                 System.out.println("Your Watchlist");
                                 Watchlist.showWatchlist(username);
+
+
 
                                 break;
                             case "F":
