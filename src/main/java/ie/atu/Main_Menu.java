@@ -4,13 +4,13 @@ import ie.atu.pool.DatabaseUtils;
 import java.sql.*;
 public class Main_Menu {
     public void showMovies(){
-      
+
         String showMovies = "SELECT movie.title, genre.name ,movie.release_date " +
 
                 "FROM movie " +
                 "JOIN genre on movie.genre_id = genre.genre_id " +
                 "ORDER BY RAND() " +
-                "LIMIT 5";
+                "LIMIT 1";
 
         try (Connection connection = DatabaseUtils.getConnection();
              Statement statement = connection.createStatement();
